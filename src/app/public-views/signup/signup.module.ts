@@ -5,6 +5,7 @@ import { HeaderModule } from 'app/shared/layouts/header/header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'ng2-toastr';
+import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ToastModule } from 'ng2-toastr';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    Ng2DeviceDetectorModule.forRoot()
   ],
   exports: [
     SignupComponent

@@ -12,6 +12,7 @@ import { ToastsManager } from 'ng2-toastr';
 import { LoginService } from 'app/shared/services/login.service';
 import { WebStorageService } from 'app/shared/services/web-storage.service';
 import { AppSettings } from 'app/app.constant';
+import { Ng2DeviceService } from 'ng2-device-detector';
 
 @Component({
   selector: 'signup',
@@ -24,7 +25,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
   // Property for the user
-  private user: User;
+  private user: any;
   public disableClick = false;
   public exist_not = false;
 
@@ -39,6 +40,8 @@ export class SignupComponent implements OnInit {
   years = [];
 
   public configConstant = AppSettings;
+  private deviceInfo;
+
 
   // Inject the formbuilder into the constructor
   constructor(
@@ -49,7 +52,8 @@ export class SignupComponent implements OnInit {
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
     public loginService: LoginService,
-    private _webStorageService: WebStorageService
+    private _webStorageService: WebStorageService,
+    private deviceService: Ng2DeviceService
   ) {
     this.toastr.setRootViewContainerRef(vcr);
     if (AppSettings.currentCountry === 'india') {
@@ -96,7 +100,7 @@ export class SignupComponent implements OnInit {
     this.genderList = ['Male', 'Female', 'Others'];
 
 
-
+    this.deviceInfo = this.deviceService.getDeviceInfo();
 
   }
 
@@ -111,7 +115,7 @@ export class SignupComponent implements OnInit {
   public onFormSubmit() {
     this.user = this.signupForm.value;
     this.user.DateOfBirth = this.signupForm.value.day + ' ' + this.signupForm.value.month + ' ' + this.signupForm.value.year;
-   
+    this.user.deviceInfo = this.deviceInfo;
    const demo = {
       'mobile': this.user.MobileNo
     };
