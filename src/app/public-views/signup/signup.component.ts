@@ -115,7 +115,9 @@ export class SignupComponent implements OnInit {
   public onFormSubmit() {
     this.user = this.signupForm.value;
     this.user.DateOfBirth = this.signupForm.value.day + ' ' + this.signupForm.value.month + ' ' + this.signupForm.value.year;
-    this.user.deviceInfo = this.deviceInfo;
+    this.user.deviceInfo = this.deviceInfo.os;
+
+	//this.toastr.error(this.deviceInfo.os);
    const demo = {
       'mobile': this.user.MobileNo
     };
